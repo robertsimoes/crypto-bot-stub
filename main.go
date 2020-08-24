@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"strings"
@@ -44,8 +45,12 @@ func Ok(w http.ResponseWriter, req *http.Request) {
 func main() {
 	// Read from environment variables injected in for 12 factor
 	viper.AutomaticEnv()
-	log.Print("Hello I am alive and running at 8080")
+
+	viper.SetDefault("PORT", "3000")
+	port := viper.GetString("PORT")
+
+	log.Printf("Hello, I am alive and running %s", port)
 
 	http.HandleFunc("/env", Ok)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(fmt.Sprintf(":%s", port), nil)
 }
