@@ -51,6 +51,6 @@ func main() {
 
 	log.Printf("Hello, I am alive and running %s", port)
 
-	http.HandleFunc("/env", Ok)
+	http.HandleFunc("/", Ok)
 	http.ListenAndServe(fmt.Sprintf(":%s", port), nil)
 }
