@@ -1,0 +1,1 @@
+web: crypto-bot-stub
