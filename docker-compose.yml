@@ -9,6 +9,6 @@ services:
     environment:
       STRATEGY: 'simplearbitrage'
       MARKET: 'BTC-USD'
-      SPREAD: '1'
+      SPREAD_PERCENTAGE: '1'
       ORDER_SIZE: '1'
       EXCHANGES: 'coinbasepro,bitfinex'

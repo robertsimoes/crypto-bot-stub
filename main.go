@@ -22,7 +22,7 @@ type EnvironmentMessage struct {
 func Ok(w http.ResponseWriter, req *http.Request) {
 	market := viper.GetString("MARKET")
 	strategy := viper.GetString("STRATEGY")
-	spread := viper.GetString("SPREAD")
+	spread := viper.GetString("SPREAD_PERCENTAGE")
 	orderSize := viper.GetString("ORDER_SIZE")
 	exchangesEnv := viper.GetString("EXCHANGES")
 	exchanges := strings.Split(exchangesEnv, ",")
