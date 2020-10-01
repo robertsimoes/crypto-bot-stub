@@ -10,12 +10,20 @@ import (
 	"github.com/spf13/viper"
 )
 
+type Credentials struct {
+	Name       string
+	Key        string
+	Passphrase string
+	Secret     string
+}
+
 type EnvironmentMessage struct {
 	Strategy  string
 	Market    string
 	Spread    string
 	OrderSize string
 	Exchanges []string
+	ApiKeys   []Credentials
 }
 
 // Ok Handler
@@ -27,12 +35,31 @@ func Ok(w http.ResponseWriter, req *http.Request) {
 	exchangesEnv := viper.GetString("EXCHANGES")
 	exchanges := strings.Split(exchangesEnv, ",")
 
+	creds := make([]Credentials, 0)
+
+	for _, e := range exchanges {
+		getCredential := func(suffix string) string {
+			return viper.GetString(strings.ToUpper(fmt.Sprintf("%s_%s", e, suffix)))
+		}
+
+		key := getCredential("key")
+		passphrase := getCredential("passphrase")
+		secret := getCredential("secret")
+		creds = append(creds, Credentials{
+			Name:       e,
+			Key:        key,
+			Passphrase: passphrase,
+			Secret:     secret,
+		})
+	}
+
 	ok := EnvironmentMessage{
 		Market:    market,
 		Spread:    spread,
 		Strategy:  strategy,
 		OrderSize: orderSize,
 		Exchanges: exchanges,
+		ApiKeys:   creds,
 	}
 
 	j, _ := json.Marshal(ok)
