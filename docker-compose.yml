@@ -12,3 +12,10 @@ services:
       SPREAD_PERCENTAGE: '1'
       ORDER_SIZE: '1'
       EXCHANGES: 'coinbasepro,bitfinex'
+      COINBASEPRO_KEY: '123'
+      COINBASEPRO_SECRET: '123'
+      COINBASEPRO_PASSPHRASE: '123'
+      BITFINEX_KEY: '123'
+      BITFINEX_PASSPHRASE: '123'
+      BITFINEX_SECRET: '123'
+      PORT: 8080
