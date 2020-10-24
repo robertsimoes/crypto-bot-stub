@@ -45,6 +45,22 @@ func Ok(w http.ResponseWriter, req *http.Request) {
 		key := getCredential("key")
 		passphrase := getCredential("passphrase")
 		secret := getCredential("secret")
+
+		// Redact for privacy
+		if len(key) > 5 {
+			key = fmt.Sprintf("%s********", key[0:5])
+		}
+
+		// Redact for privacy
+		if len(passphrase) > 5 {
+			passphrase = fmt.Sprintf("%s********", passphrase[0:5])
+		}
+
+		// Redact for privacy
+		if len(secret) > 5 {
+			secret = fmt.Sprintf("%s********", secret[0:5])
+		}
+
 		creds = append(creds, Credentials{
 			Name:       e,
 			Key:        key,
